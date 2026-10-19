@@ -19,34 +19,30 @@
 <!-- ============ 1. HERO ============ -->
 <section id="hero">
   <div class="hero-sky" aria-hidden="true">
-    <img class="sun" src="assets/sun_face.webp" alt="">
-    <img class="cloud c1" src="assets/cloud_2.webp" alt="">
     <img class="cloud c2" src="assets/cloud_5.webp" alt="">
-    <img class="cloud c3" src="assets/cloud_0.webp" alt="">
-    <img class="hills" src="assets/bg_hills.webp" alt="">
   </div>
-  <img class="disco" src="assets/light_0.webp" alt="" aria-hidden="true">
   <img class="flyer f1" src="assets/fly_0.webp" alt="" aria-hidden="true">
   <img class="flyer f2" src="assets/fly_2.webp" alt="" aria-hidden="true">
 
-  <!-- foreground composition: designed at 1600x900 and scaled as one piece -->
+  <!-- foreground composition: designed at 1600x900 and scaled as one piece; sun, hills and the disco ball
+       live in it too, so nothing drifts apart on other screen shapes -->
   <div class="hero-stage" id="heroStage">
-  <div class="meme">
-    <div class="meme-pic" role="img" aria-label="Мем: «Внимание!!! Спасибо за внимание»">
-      <i class="pin"></i>
-      <b>Внимание!!!</b>
-      <img src="assets/meme_photo.webp" alt="">
-      <span>Спасибо за внимание</span>
-    </div>
+  <div class="sun">
+    <img class="sun-rays" src="assets/sun_rays.webp" alt="">
+    <img class="sun-head" src="assets/heads/solon.webp" alt="">
+  </div>
+  <!-- the hills are mirrored on both sides so they run past the stage edges without a seam -->
+  <div class="hills" aria-hidden="true"><img src="assets/bg_hills.webp" alt=""><img src="assets/bg_hills.webp" alt=""><img src="assets/bg_hills.webp" alt=""></div>
+  <div class="disco" aria-hidden="true"><img src="assets/light_0.webp" alt=""></div>
+
+  <div class="scrap scrap-cream tilt-r hero-tag">
+    <img class="tape" src="assets/paper_0.webp" alt="">
+    <p>Вы покупаете внимание.<br><b>Мы привозим его в Nuanu.</b></p>
   </div>
 
   <div class="hero-copy">
     <div class="ribbon"><span>Mr. G представляет</span></div>
     <h1><span class="l1">Nuanu</span><span class="l2">Cruise</span></h1>
-      <div class="scrap scrap-cream tilt-r meme-cap">
-      <img class="tape" src="assets/paper_0.webp" alt="">
-      <p>Вы покупаете внимание.<br><b>Мы привозим его в Nuanu.</b></p>
-    </div>
   </div>
 
   <div class="mrg" id="mrg">
@@ -117,7 +113,7 @@
 <section id="deal">
   <div class="vip-pass">
     <img class="pass-img" src="assets/props_5.webp" alt="">
-    <div class="pass-text"><small>VIP</small><b>Первый месяц — бесплатно</b><span>Смотрите результат, потом решаете.</span></div>
+    <div class="pass-text"><b>Первый месяц — бесплатно</b><span>Смотрите результат, потом решайте.</span></div>
   </div>
 
   <div class="cards">
@@ -193,8 +189,6 @@
       </div>
       <div class="ticks"><span>0</span><span>50 млн</span><span>100 млн — цель</span><span><b class="tick-end">150 млн</b></span></div>
     </div>
-
-    <p class="stop">Остановиться можно после любого месяца.</p>
   </div>
 
   <!-- plan -->

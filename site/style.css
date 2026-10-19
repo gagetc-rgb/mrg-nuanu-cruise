@@ -12,7 +12,9 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+/* native smooth scrolling only as a fallback: with Lenis it turns every per-frame scroll write into a new
+   native animation, so the page crawls and then jumps */
+html:not(.lenis) { scroll-behavior: smooth; }
 body {
   margin: 0;
   background: var(--purple-deep);
@@ -87,42 +89,49 @@ h1, h2, h3 { margin: 0; font-weight: 400; }
   background: var(--purple) url(assets/bg_sky.webp) center bottom / cover;
 }
 .hero-sky { position: absolute; inset: 0; }
-.hero-sky .sun { position: absolute; left: 50%; bottom: 14%; width: min(40vw, 460px); transform: translateX(-50%); }
 .hero-sky .cloud { position: absolute; opacity: .95; }
-.hero-sky .c1 { width: 22vw; left: 6%; top: 12%; }
-.hero-sky .c2 { width: 26vw; right: 4%; top: 6%; }
-.hero-sky .c3 { width: 30vw; left: 30%; top: 30%; opacity: .8; }
-.hero-sky .hills { position: absolute; left: 0; right: 0; bottom: -2%; width: 100%; }
-.disco { position: absolute; top: -40px; left: 50%; width: clamp(90px, 11vw, 160px); transform-origin: 50% 0; z-index: 9; }
+.hero-sky .c2 { width: 24vw; right: 5%; top: 5%; }
+/* stage units (1600x900). The sun sets behind the mountain: its lower rays hide, the disc and face stay clear */
+.sun { position: absolute; z-index: 1; left: 585px; top: 268px; width: 440px; }
+.sun-rays { width: 100%; }
+.sun-head { position: absolute; left: 28.6%; top: 23%; width: 43.6%; transform-origin: 50% 90%; }
+.hills { position: absolute; z-index: 2; left: -1300px; top: 540px; width: 4200px; display: flex; pointer-events: none; }
+.hills img { width: 33.3334%; }
+.hills img:first-child, .hills img:last-child { scale: -1 1; }
+/* the cord runs up off the stage so the ball still hangs from the top when the stage sits lower */
+.disco { position: absolute; z-index: 9; top: -40px; left: 830px; width: 140px; }
+.disco img { width: 100%; }
+.disco::before { content: ''; position: absolute; left: 50%; bottom: 99%; width: 3px; height: 1200px; margin-left: -1.5px; background: var(--ink); }
 .flyer { position: absolute; z-index: 4; width: clamp(90px, 10vw, 150px); }
 .flyer.f1 { top: 18%; left: -12%; }
 .flyer.f2 { top: 8%; left: -12%; width: clamp(110px, 12vw, 180px); }
 
 .hero-copy {
-  position: absolute; z-index: 6; left: 255px; top: 330px; max-width: 560px;
+  position: absolute; z-index: 6; left: 260px; top: 300px; max-width: 560px;
 }
 .hero-copy .ribbon { font-size: 26px; }
-.hero-copy h1 { font-family: var(--display); font-style: italic; font-weight: 900; line-height: .9; margin: 30px 0 30px; }
+.hero-copy h1 { font-family: var(--display); font-style: italic; font-weight: 900; line-height: .9; margin: 26px 0 0; }
 .hero-copy h1 span { display: block; color: var(--cream); text-shadow: 5px 5px 0 var(--ink), 9px 9px 0 var(--pink); }
-.hero-copy .l1 { font-size: 90px; }
-.hero-copy .l2 { font-size: 136px; margin-bottom: .12em; color: var(--gold) !important; transform: rotate(-4deg); }
+.hero-copy .l1 { font-size: 84px; }
+.hero-copy .l2 { font-size: 124px; color: var(--gold) !important; transform: rotate(-4deg); }
 
 
 
 
 
 .mrg {
-  position: absolute; z-index: 5; left: 880px; bottom: -6px;
+  position: absolute; z-index: 5; left: 910px; bottom: -6px;
   height: 650px; aspect-ratio: var(--mrg-ar, .62); cursor: pointer;
 }
 .mrg-body { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: bottom; }
 .mrg-head { position: absolute; transform-origin: 50% 88%; }
-.mrg .bubble { position: absolute; left: 66%; top: -14%; width: 50%; z-index: 9; transform: scaleX(-1) rotate(-4deg); }
-.mrg .bubble p { transform: scaleX(-1); }
-.mrg .bubble img { width: 100%; }
+/* comic speech bubble: hangs under the disco ball, tail turned to Mr. G's face; only the drawing is
+   flipped and rotated, the text stays upright */
+.mrg .bubble { position: absolute; left: -18.9%; top: -20.2%; width: 51.5%; z-index: 9; transform: rotate(-4deg); }
+.mrg .bubble img { width: 100%; transform: rotate(-47deg) scaleX(-1); }
 .mrg .bubble p {
-  position: absolute; inset: 12% 13% 30% 13%; margin: 0; display: grid; place-items: center; text-align: center;
-  font: italic 900 19px/1.1 var(--display); color: var(--purple);
+  position: absolute; inset: 15% 23% 23% 9%; margin: 0; display: grid; place-items: center; text-align: center;
+  font: italic 900 18px/1.1 var(--display); color: var(--purple);
 }
 .curtain { position: absolute; top: 0; height: 104%; width: auto; z-index: 8; pointer-events: none; }
 .curtain.cl { left: 0; transform-origin: 0 0; }
@@ -138,30 +147,11 @@ h1, h2, h3 { margin: 0; font-weight: 400; }
   position: absolute; z-index: 5; left: 50%; bottom: 0; width: 1600px; height: 900px;
   transform-origin: 50% 100%; transform: translateX(-50%) scale(var(--hs, 1));
 }
-.meme { position: absolute; z-index: 7; left: 255px; top: 26px; display: flex; align-items: flex-end; }
-/* the meme must grab the eye: neon frame that flickers in steps */
-.meme-pic { animation: neon 1.6s steps(2) infinite; }
-@keyframes neon {
-  0%, 100% { box-shadow: 0 0 0 5px var(--gold), 0 0 22px 8px rgba(255, 62, 165, .95), 0 0 60px 18px rgba(245, 183, 0, .6), 6px 8px 0 10px rgba(0,0,0,.35); }
-  50% { box-shadow: 0 0 0 5px var(--pink), 0 0 30px 12px rgba(245, 183, 0, .95), 0 0 80px 26px rgba(255, 62, 165, .55), 6px 8px 0 10px rgba(0,0,0,.35); }
-}
-.meme-pic {
-  position: relative; width: 196px; padding: 11% 9% 7%; transform: rotate(-4deg);
-  background: #fff; text-align: center; color: #1a1a1a;
-  font-family: 'Carlito', 'Calibri', Arial, sans-serif;
-}
-/* the meme is re-typeset so the words stay crisp; only the portrait is the original photo */
-.meme-pic b { display: block; font-weight: 400; font-size: 24px; line-height: 1; margin-bottom: 8%; }
-.meme-pic img { width: 100%; display: block; }
-.meme-pic span { display: block; white-space: nowrap; font-size: 13px; margin-top: 6%; }
-.meme-pic .pin {
-  position: absolute; left: 50%; top: 3.5%; width: 13px; height: 13px; margin-left: -6px; border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fff59a, #ffd400 55%, #c79a00); box-shadow: 1px 2px 2px rgba(0,0,0,.45);
-}
-.meme-cap { display: inline-block; margin-top: 4px; max-width: 360px; font-size: 20px; line-height: 1.3; z-index: 2; }
-.meme-cap p { margin: 0; }
-.meme-cap b { display: block; margin-top: 4px; font: italic 900 1.25em/1.1 var(--display); color: var(--pink); }
-.meme-cap .tape { left: 18%; top: -22px; width: 90px; transform: rotate(-10deg); }
+/* the pitch in one line, pinned top-left */
+.hero-tag { position: absolute; z-index: 7; left: 255px; top: 60px; max-width: 390px; font-size: 22px; line-height: 1.3; }
+.hero-tag p { margin: 0; }
+.hero-tag b { display: block; margin-top: 4px; font: italic 900 1.25em/1.1 var(--display); color: var(--pink); }
+.hero-tag .tape { left: 18%; top: -22px; width: 90px; transform: rotate(-10deg); }
 .pimp-badge { position: absolute; z-index: 4; left: 44%; top: 30%; width: 40%; transform: rotate(10deg); }
 .pimp-badge img { width: 100%; }
 .pimp-badge span {
@@ -171,13 +161,13 @@ h1, h2, h3 { margin: 0; font-weight: 400; }
 
 /* portrait screens (phone, tablet held upright): stacked hero instead of the 16:9 composition */
 #hero.stacked .hero-stage { left: 0; width: 100%; height: 100%; transform: none; }
-#hero.stacked .meme { left: 6vw; top: 3vh; }
-#hero.stacked .meme-pic { width: 30vw; }
-#hero.stacked .meme-pic b { font-size: 4vw; } #hero.stacked .meme-pic span { font-size: 2.1vw; }
-#hero.stacked .hero-copy { left: 6vw; right: 6vw; top: calc(3vh + 46vw); max-width: none; }
+#hero.stacked .disco { left: 68vw; width: 15vw; top: -3vw; }
+#hero.stacked .sun { left: 6vw; top: auto; bottom: 20%; width: 48vw; }
+#hero.stacked .hills { left: -100vw; width: 300vw; top: auto; bottom: -2%; }
+#hero.stacked .hero-tag { left: 14vw; top: calc(3vh + 22px); max-width: 52vw; font-size: 3.8vw; padding: 24px 18px 16px; }
+#hero.stacked .hero-copy { left: 6vw; right: 6vw; top: calc(3vh + 22px + 40vw); max-width: none; }
 #hero.stacked .hero-copy .ribbon { font-size: 4vw; }
 #hero.stacked .hero-copy .l1 { font-size: 11vw; } #hero.stacked .hero-copy .l2 { font-size: 16vw; }
-#hero.stacked .meme-cap { max-width: 62vw; font-size: 3.6vw; }
 #hero.stacked .mrg { left: auto; right: -2vw; bottom: 0; height: min(40vh, 100vw); }
 #hero.stacked .mrg .bubble { display: none; }
 #hero.stacked .mrg .bubble p { transform: none; font-size: max(13px, 2.9vw); }
@@ -304,13 +294,13 @@ h1, h2, h3 { margin: 0; font-weight: 400; }
 }
 .vip-pass { position: relative; cursor: pointer; width: min(460px, 86vw); margin: 0 auto 70px; }
 .pass-img { width: 100%; filter: drop-shadow(8px 10px 0 rgba(0,0,0,.35)); }
+/* text box = the pink window of the badge (measured on the 399x420 art: centre 29% / 65.5%, tilted ~9deg) */
 .pass-text {
-  position: absolute; left: 10%; top: 36%; width: 41%; height: 52%; transform: rotate(-1.5deg); padding: 0 2%;
+  position: absolute; left: 14%; top: 47.5%; width: 30%; height: 36%; transform: rotate(9deg);
   display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: var(--cream);
 }
-.pass-text small { font: 900 14px/1 var(--body); letter-spacing: .3em; color: var(--gold); text-shadow: 1px 1px 0 var(--ink); }
-.pass-text b { font: italic 900 clamp(18px, 2.1vw, 26px)/1.04 var(--display); margin: 8px 0; text-shadow: 2px 2px 0 var(--ink); }
-.pass-text span { font: 600 clamp(11px, 1vw, 13px)/1.3 var(--body); }
+.pass-text b { font: italic 900 clamp(14px, 4.1vw, 22px)/1.04 var(--display); margin: 0 0 8px; text-shadow: 2px 2px 0 var(--ink); }
+.pass-text span { font: 600 clamp(9px, 2.2vw, 12px)/1.3 var(--body); }
 
 .cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 46px 40px; max-width: 980px; margin: 0 auto 90px; }
 .card h3 { font: italic 900 28px/1 var(--display); margin: 4px 0 12px; }
@@ -370,7 +360,6 @@ h1, h2, h3 { margin: 0; font-weight: 400; }
 .bar.tall { width: 100%; background: var(--purple); color: var(--cream); }
 .bar.short { width: 38%; min-width: 150px; background: var(--gold); }
 .per { margin: 4px 0 0; font: 600 13px var(--body); opacity: .75; }
-.stop { margin: 30px 0 0; font: italic 900 clamp(20px, 2.4vw, 28px)/1.15 var(--display); color: var(--pink); }
 
 .road-signs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: s; }
 .road-signs li {

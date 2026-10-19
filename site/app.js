@@ -111,8 +111,9 @@
   // photo head ~2.3x the placeholder width, chin sitting on the placeholder's neck
   const HEAD_W = .4, headH = HEAD_W * mrgA.ar;              // head image is ~square
   const chinY = mrgA.top + (mrgA.chin - mrgA.top) * .75;     // placeholder chin, fraction of body height
+  const HEAD_CX = .565;                                       // over the neck; the measured cx (.53) sits left of it
   Object.assign(mrgHead.style, {
-    width: HEAD_W * 100 + '%', left: (mrgA.cx - HEAD_W / 2) * 100 + '%', top: (chinY - .86 * headH) * 100 + '%',
+    width: HEAD_W * 100 + '%', left: (HEAD_CX - HEAD_W / 2) * 100 + '%', top: (chinY - .86 * headH) * 100 + '%',
   });
   const mrgSpring = addSpring(mrgHead, 70, 4);
   const lines = ['Цель — 100 млн органических просмотров за 6 месяцев.', 'Первый месяц — бесплатно.', 'Я звоню друзьям — они приезжают.'];
@@ -132,7 +133,8 @@
   window.__resetReveals = () => ScrollTrigger.getAll().forEach(st => { if (!st.vars.scrub && st.animation) st.animation.progress(0).pause(); });
   // curtains: start closed in the middle of the stage, part to the sides, keep ~15vw of fabric visible
   const curtainPos = () => {
-    const w = $('.curtain.cl').offsetWidth || 380, keep = innerWidth * .15;
+    // width from the art's proportions (492x1200, height 104% of the hero): this runs before the image has loaded
+    const w = $('#hero').offsetHeight * 1.04 * .41, keep = innerWidth * .15;
     return { open: Math.min(0, keep - w), shut: innerWidth * .5 - w };
   };
   const cp = curtainPos();
@@ -141,27 +143,30 @@
   addEventListener('resize', () => { const c = curtainPos(); gsap.set('.curtain.cl', { x: c.open }); gsap.set('.curtain.cr', { x: -c.open }); });
   intro.from('.curtain.cl', { x: cp.shut, duration: 1.2, ease: 'steps(8)' }, 0)
        .from('.curtain.cr', { x: -cp.shut, duration: 1.2, ease: 'steps(8)' }, 0)
-       .from('.hero-sky .sun', { yPercent: 60, duration: 1.4, ease: 'steps(7)' }, .2)
+       .from('.sun', { y: 320, duration: 1.4, ease: 'steps(7)' }, .2)
        .from('.mrg', { xPercent: 120, rotate: 12, duration: .9, ease: 'steps(6)' }, .6)
-       .from('.meme', { y: -260, rotate: -20, duration: .5, ease: 'steps(5)' }, .7)
+       .from('.hero-tag', { y: -260, rotate: -20, duration: .5, ease: 'steps(5)' }, .7)
        .from('.hero-copy > *', { y: -60, opacity: 0, stagger: .18, duration: .5, ease: jerky }, 1)
        .from('.mrg .bubble', { scale: 0, duration: .3, ease: jerky }, 1.6);
-  gsap.to('.disco', { rotate: 6, duration: 1.2, ease: 'steps(4)', yoyo: true, repeat: -1, transformOrigin: '50% 0' });
+  // the ball sways on its cord, pivoting far above the stage
+  gsap.fromTo('.disco', { rotate: -2 }, { rotate: 2, duration: 1.2, ease: 'steps(4)', yoyo: true, repeat: -1, transformOrigin: '50% -500px' });
   gsap.fromTo('.flyer.f1', { x: 0 }, { x: () => innerWidth * 1.3, y: -40, duration: 16, ease: 'steps(80)', repeat: -1, delay: 2 });
   gsap.fromTo('.flyer.f2', { x: 0 }, { x: () => innerWidth * 1.3, y: 60, duration: 22, ease: 'steps(90)', repeat: -1, delay: 9 });
   gsap.to('.hero-sky .cloud', { x: '+=40', duration: 4, ease: 'steps(8)', yoyo: true, repeat: -1, stagger: 1.3 });
   // mouse parallax
   $('#hero').addEventListener('mousemove', e => {
     const dx = e.clientX / innerWidth - .5, dy = e.clientY / innerHeight - .5;
-    gsap.to('.hero-sky .sun', { x: dx * 30, y: dy * 20, duration: .4 });
+    gsap.to('.sun', { x: dx * 30, y: dy * 20, duration: .4 });
     gsap.to('.hero-sky .cloud', { xPercent: dx * -12, duration: .5 });
     gsap.to('.mrg', { x: dx * -18, duration: .5 });
   });
   // the sun is a button: the foot of fate
-  const sun = $('.hero-sky .sun');
-  sun.style.pointerEvents = 'auto'; sun.style.cursor = 'pointer'; sun.title = 'Не нажимайте на солнце';
+  const sun = $('.sun');
+  sun.style.cursor = 'pointer'; sun.title = 'Не нажимайте на солнце';
   $('.hero-sky').style.pointerEvents = 'none';
   sun.addEventListener('click', () => stomp());
+  const sunSpring = addSpring($('.sun-head'), 60, 3.5);
+  sun.addEventListener('mouseenter', () => kick(sunSpring, 140));
   const disco = $('.disco');
   disco.style.cursor = 'pointer'; disco.title = 'Не трогайте диско-шар';
   disco.addEventListener('click', () => stomp());
@@ -204,7 +209,9 @@
 
   /* a cut-out person: body sprite + photo head(s) + optional camera held beside the face */
   const puppets = [];
-  function person({ body, heads = [], kit = null, side = 1, badge = false, mirror = false, cls, headW = .8, tag }) {
+  // headH: size the head by its height (fraction of the body width) instead of its width, for cut-outs whose
+  // proportions vary (the crew heads are cropped tight to the chin)
+  function person({ body, heads = [], kit = null, side = 1, badge = false, mirror = false, cls, headW = .8, headH = 0, tag }) {
     const nk = neckOf(body), el = document.createElement('div');
     el.className = cls; el.style.aspectRatio = nk.ar;
     el.innerHTML = `<img class="body" src="assets/${body}.webp" alt=""${mirror ? ' style="scale:-1 1"' : ''}>` + (badge ? '<span class="crew-badge">Crew</span>' : '');
@@ -214,6 +221,8 @@
       const img = document.createElement('img');
       img.className = 'head'; img.src = `assets/heads/${h}.webp`; img.alt = tag ? tag.name : '';
       Object.assign(img.style, { width: headW * 100 + '%', left: (neckX - headW / 2 + (i - (n - 1) / 2) * .5) * 100 + '%', bottom: `calc(${(1 - nk.y) * 100}% - ${headW * 12}%)` });
+      // chin down on the collar, so the head reads as attached
+      if (headH) Object.assign(img.style, { width: 'auto', height: headH * nk.ar * 100 + '%', left: (neckX + (i - (n - 1) / 2) * .5) * 100 + '%', translate: '-50% 0', bottom: `calc(${(1 - nk.y) * 100}% - 13%)` });
       el.appendChild(img); hs.push(img);
       const s = addSpring(img, 60 + Math.random() * 40, 3 + Math.random() * 2);
       if (tag) {
@@ -287,7 +296,7 @@
     car.innerHTML = `<div class="rig"><div class="riders"></div><img class="car-img" src="assets/${c.img}.webp" alt="Cadillac convertible"></div>`;
     const riders = $('.riders', car), seated = [];
     if (c.crew) {
-      const p = person({ body: 'bodyB_1', heads: [c.crew.face], kit: c.crew.kit, badge: true, cls: 'rider crew', headW: .74, tag: CREW_TAG });
+      const p = person({ body: 'bodyB_1', heads: [c.crew.face], kit: c.crew.kit, badge: true, cls: 'rider crew', headW: .74, headH: .97, tag: CREW_TAG });
       Object.assign(p.el.style, { left: (c.crew.x - RIDER_W / 2) * 100 + '%', width: RIDER_W * 100 + '%', bottom: '70%' });
       riders.appendChild(p.el);
       c.crewCam = p.cam;
@@ -348,7 +357,7 @@
     { face: 'crew_3', kit: 'dslr', body: 'bodyA_2', x: DOOR_X + 330, side: -1 },
   ];
   const paps = PAPS.map(pp => {
-    const p = person({ body: pp.body, heads: [pp.face], kit: pp.kit, side: pp.side, badge: true, cls: 'pap', headW: .78, tag: PAP_TAG });
+    const p = person({ body: pp.body, heads: [pp.face], kit: pp.kit, side: pp.side, badge: true, cls: 'pap', headW: .78, headH: 1.02, tag: PAP_TAG });
     Object.assign(p.el.style, { width: '135px', left: pp.x - 68 + 'px', bottom: '6px' });
     $('#paparazzi').appendChild(p.el);
     return p;

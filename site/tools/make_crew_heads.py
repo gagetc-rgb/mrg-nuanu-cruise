@@ -3,6 +3,7 @@ import os
 import numpy as np
 from PIL import Image, ImageFilter
 from rembg import new_session, remove
+from scipy import ndimage
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SHEET = os.path.join(HERE, '..', '..', 'mrg_faces', 'indonesian_faces_sheet_v1.png')
@@ -14,6 +15,14 @@ for i in range(8):
     r, c = divmod(i, 4)
     cell = im.crop((int(c * cw), int(r * ch), int((c + 1) * cw), int((r + 1) * ch)))
     cut = remove(cell, session=session).convert('RGBA')
+    # keep only the head blob and crop to what is actually visible: the matting leaves a faint, invisible
+    # skirt under the chin, and cropping to it made the heads float above the bodies' necks
+    a = np.array(cut)
+    lab, _ = ndimage.label(a[:, :, 3] > 40)
+    blob = lab == np.bincount(lab.ravel())[1:].argmax() + 1
+    a[:, :, 3] = np.where(ndimage.binary_dilation(blob, iterations=2), a[:, :, 3], 0)
+    a[:, :, 3][a[:, :, 3] <= 40] = 0
+    cut = Image.fromarray(a)
     cut = cut.crop(cut.getbbox())
     pad = 14
     canvas = Image.new('RGBA', (cut.width + 2 * pad, cut.height + 2 * pad), (0, 0, 0, 0))
