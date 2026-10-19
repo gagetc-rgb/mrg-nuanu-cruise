@@ -1,0 +1,15 @@
+# whitelist: only the current site, its sources and the current pitch go to GitHub
+/*
+!/.gitignore
+!/README.md
+!/Nuanu_pitch_short.md
+!/Запустить сайт.bat
+!/site/
+!/mrg_faces/
+!/mrg_photo_props/
+/site/tools/src_faces/
+/site/tools/cells/
+/site/tools/scratch/
+/site/tools/__pycache__/
+/site/tools/patch_*.py
+/site/tools/raw/

@@ -1,0 +1,20 @@
+Use case: stylized-concept. Asset type: ONE production sprite/prop atlas for the existing Mr G retro-glam illustrated project.
+Use the supplied reference image ONLY as a style reference: bold black ink contours, slightly distressed 1970s comic / screenprint shading, magenta and deep purple accents, rich gold and cream highlights. Create entirely NEW photography and smartphone props; do not repeat the dice, champagne, money or other reference objects.
+
+Create exactly TWELVE separate large isolated object illustrations, evenly arranged in a generous 4-column by 3-row grid on a genuinely TRANSPARENT background. No visible grid, borders, labels or numbers. Every object fully contained with wide clear transparent gutters, no overlap, no clipping. Consistent drawing style and visual scale across the atlas. Objects only: NO hands, people, faces, tables or scenery. Clean sharp silhouettes and readable details suitable for cutting out and animating independently.
+
+Objects in reading order:
+1. A substantial black and chrome professional DSLR camera, front three-quarter view, protruding lens aimed slightly toward the viewer's left, hot-shoe flash mounted, flash OFF.
+2. EXACT SAME camera, same body/lens/angle/scale as item 1, flash FIRED: crisp brilliant cream-white and golden starburst clearly attached to the hot-shoe flash, contained entirely inside its own cell, no haze crossing the gutters.
+3. Iconic classic Leica M-style rangefinder, recognizable compact silver metal top plate, black pebbled leather body, round glass lens and small red round badge; front three-quarter view, lens aimed toward viewer's right.
+4. A second view of the classic Leica camera, rear three-quarter view slightly from above, show back panel, eyepiece, top dials and silver chassis.
+5. Small retro silver compact point-and-shoot camera with tasteful hot pink trim, straight front view, small circular lens and built-in rectangular flash.
+6. A different chunky black analog SLR camera, side three-quarter view pointing to the left, long silver-rimmed lens, deep purple strap loop kept close to the body.
+7. Black contemporary smartphone held vertically but FLOATING WITHOUT HANDS, back facing viewer at a three-quarter angle, clear triple camera lens cluster indicating it is filming, slightly tilted clockwise.
+8. Deep purple smartphone in portrait orientation, SCREEN facing viewer at a three-quarter angle, camera recording interface with framing brackets and tiny red record indicator; simple abstract magenta/gold viewfinder image, no people or legible words.
+9. Silver smartphone in landscape orientation, BACK facing viewer at three-quarter angle, camera lenses clearly visible, aimed toward the viewer.
+10. Hot pink-cased smartphone in landscape orientation, SCREEN facing viewer, camera viewfinder and red recording dot, angled slightly counterclockwise.
+11. A narrow black smartphone in dramatic side three-quarter view, portrait orientation, visible rear lens protrusions and gold side buttons, tilted to the left.
+12. Cream and gold smartphone in portrait orientation, rear three-quarter view from the opposite side to item 7, clearly distinct twin-camera lens arrangement, tilted to the right.
+
+Maintain a coherent purple, magenta, cream, gold and black retro luxury palette while cameras remain recognizable silver/black hardware. Stylized illustrated assets, not photographs and not 3D renders. Transparent alpha in ALL empty space. Do NOT draw a black backdrop, checkerboard pattern, glow backdrop, drop-shadow rectangles, collage panels, text captions, watermarks or extra objects. One single complete atlas image only.

@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mr. G — Nuanu Cruise</title>
+<meta name="description" content="Mr. G привозит в Nuanu крупных индонезийских блогеров. Первый месяц бесплатно.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,600;0,800;0,900;1,900&family=PT+Mono&family=Carlito&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- preloader: every image is downloaded and decoded before the show starts, so scrolling never waits for the network -->
+<div id="loader"><div class="ld-box"><b>Mr. G</b><span id="ldText">заводит Кадиллак…</span><div class="ld-bar"><i id="ldBar"></i></div><small id="ldPct">0%</small></div></div>
+<div class="grain" aria-hidden="true"></div>
+<button id="sound" class="sticker-btn" aria-pressed="false" title="Звук">♪ <span>выкл</span></button>
+
+<!-- ============ 1. HERO ============ -->
+<section id="hero">
+  <div class="hero-sky" aria-hidden="true">
+    <img class="sun" src="assets/sun_face.webp" alt="">
+    <img class="cloud c1" src="assets/cloud_2.webp" alt="">
+    <img class="cloud c2" src="assets/cloud_5.webp" alt="">
+    <img class="cloud c3" src="assets/cloud_0.webp" alt="">
+    <img class="hills" src="assets/bg_hills.webp" alt="">
+  </div>
+  <img class="disco" src="assets/light_0.webp" alt="" aria-hidden="true">
+  <img class="flyer f1" src="assets/fly_0.webp" alt="" aria-hidden="true">
+  <img class="flyer f2" src="assets/fly_2.webp" alt="" aria-hidden="true">
+
+  <!-- foreground composition: designed at 1600x900 and scaled as one piece -->
+  <div class="hero-stage" id="heroStage">
+  <div class="meme">
+    <div class="meme-pic" role="img" aria-label="Мем: «Внимание!!! Спасибо за внимание»">
+      <i class="pin"></i>
+      <b>Внимание!!!</b>
+      <img src="assets/meme_photo.webp" alt="">
+      <span>Спасибо за внимание</span>
+    </div>
+  </div>
+
+  <div class="hero-copy">
+    <div class="ribbon"><span>Mr. G представляет</span></div>
+    <h1><span class="l1">Nuanu</span><span class="l2">Cruise</span></h1>
+      <div class="scrap scrap-cream tilt-r meme-cap">
+      <img class="tape" src="assets/paper_0.webp" alt="">
+      <p>Вы покупаете внимание.<br><b>Мы привозим его в Nuanu.</b></p>
+    </div>
+  </div>
+
+  <div class="mrg" id="mrg">
+    <div class="bubble"><img src="assets/shape_3.webp" alt=""><p>Цель — 100 млн органических просмотров за 6 месяцев.</p></div>
+    <img class="mrg-body" src="assets/mrg_welcome.webp" alt="Mr. G в розовой шубе">
+    <img class="mrg-head" src="assets/heads/mrg.webp" alt="">
+  </div>
+  </div>
+
+  <img class="curtain cl" src="assets/curtain.webp" alt="" aria-hidden="true">
+  <img class="curtain cr" src="assets/curtain.webp" alt="" aria-hidden="true">
+  <a class="scroll-cue" href="#parade">Поехали <span>↓</span></a>
+</section>
+
+<!-- ============ 2. PARADE ============ -->
+<section id="parade">
+  <div class="sticky">
+    <div class="layer sky" aria-hidden="true"></div>
+    <div class="night" aria-hidden="true"></div>
+    <div class="stage" id="stage">
+      <!-- parallax planes in stage units (1600 x 900), moved by the scroll timeline -->
+      <div class="plane" id="plFar">
+        <div class="tile hills"></div>
+      </div>
+      <div class="plane" id="plMid">
+        <div class="tile palms"></div>
+      </div>
+      <div class="plane" id="plNear">
+        <img class="statue" id="statue" src="assets/place_nuanu_head.webp" alt="Каменная голова Nuanu">
+        <div class="luna-statue" id="wire">
+          <img class="wire-img" src="assets/place_luna_wire_glow.webp" alt="Скульптура Luna Beach Club">
+          <img class="wire-ball" src="assets/light_0.webp" alt="">
+        </div>
+      </div>
+      <div class="plane" id="plFront">
+        <img class="entrance" id="entrance" src="assets/place_luna_entrance.webp" alt="Вход в Luna Beach Club">
+        <div class="tile road"></div>
+        <div class="carpet" id="carpet"></div>
+        <img class="carpet-roll" id="carpetRoll" src="assets/props_3.webp" alt="">
+        <div id="walkers"></div>
+        <div class="ropes" id="ropes"></div>
+        <div id="cars"></div>
+        <div id="paparazzi"></div>
+      </div>
+    </div>
+    <div class="layer crowd" aria-hidden="true"></div>
+
+    <div class="parade-copy" id="paradeCopy">
+      <h2>Кто едет</h2>
+      <p class="lede">Друзья Mr. G — крупные блогеры Индонезии. В ростере 100+ авторов.</p>
+      <div class="pimp-line"><img src="assets/shape_1.webp" alt=""><span>Pimp gets paid.<br>Bitches are for free.</span></div>
+      <div class="counter">
+        <img src="assets/shape_0.webp" alt="">
+        <div><b id="followers">0</b><span>подписчиков в машинах</span></div>
+      </div>
+    </div>
+    <div class="caption scrap scrap-cream" id="caption">
+      <img class="tape" src="assets/paper_1.webp" alt="">
+      <b>Они приезжают отдыхать.</b>
+      <span>Наша съёмочная группа снимает им готовые ролики. Они выкладывают их у себя с отметкой Nuanu.</span>
+    </div>
+    <a class="roster-btn sticker-btn" href="roster.html" target="_blank" rel="noopener">Весь ростер →</a>
+    <div class="hint">листайте вниз · наведите на лицо · кликните по машине</div>
+  </div>
+</section>
+
+<!-- ============ 3. THE DEAL ============ -->
+<section id="deal">
+  <div class="vip-pass">
+    <img class="pass-img" src="assets/props_5.webp" alt="">
+    <div class="pass-text"><small>VIP</small><b>Первый месяц — бесплатно</b><span>Смотрите результат, потом решаете.</span></div>
+  </div>
+
+  <div class="cards">
+    <article class="scrap scrap-cream tilt-l card">
+      <img class="tape" src="assets/paper_0.webp" alt="">
+      <h3>Зачем</h3>
+      <ul>
+        <li>Чем больше людей знают Nuanu, тем больше входов и трат на месте.</li>
+        <li>Быстрее всего это делают крупные индонезийские блогеры.</li>
+        <li>Но пост у них стоит $1 400–1 700, и сколько он наберёт, никто не гарантирует.</li>
+      </ul>
+      <details><summary>Подробнее</summary>
+        <p>Средний прайс блогера с аудиторией от 1 млн в Индонезии — Rp25 млн за пост в Instagram и Rp30 млн за видео в TikTok (данные 2023 года по 533 авторам). Платишь за пост, а не за просмотры. В реальных кампаниях это выходит $1–2 за 1 000 просмотров: например, у mega-блогера в кампании Tiento — $1,71. Если пост в TikTok за Rp30 млн наберёт 500 тыс. просмотров, тысяча обойдётся в $3,32.</p>
+      </details>
+    </article>
+    <article class="scrap scrap-pink tilt-r card">
+      <img class="tape" src="assets/paper_1.webp" alt="">
+      <h3>Почему блогеры поедут</h3>
+      <ul>
+        <li>Блогеры живут за счёт контента и устают делать его каждый день.</li>
+        <li>Здесь контент делаем мы, бесплатно для них.</li>
+        <li>Им — отдых и готовые ролики. Nuanu — отметки и просмотры.</li>
+      </ul>
+      <details><summary>Подробнее</summary>
+        <p>Главная боль блогера — нужно постоянно производить контент. Мы её снимаем: приезжаешь, отдыхаешь, получаешь готовое видео. Поэтому блогеры едут без гонорара, а Nuanu получает публикации без оплаты за пост.</p>
+      </details>
+    </article>
+    <article class="scrap scrap-purple tilt-l card">
+      <img class="tape" src="assets/paper_2.webp" alt="">
+      <h3>Что нужно от Nuanu</h3>
+      <ul>
+        <li>Одна вилла, когда она не сдана.</li>
+        <li>Гольф-кар в дни съёмок.</li>
+        <li>Стол со скидкой 50% на еду.</li>
+      </ul>
+      <details><summary>Подробнее</summary>
+        <p>Свободная вилла стоит Nuanu только уборки и белья. Еда со скидкой 50% всё равно в плюсе: обычная наценка на еду около трёх раз. Напитки гости покупают по полной цене, это чистая выручка. Все чеки гостей сводим и показываем в конце месяца.</p>
+      </details>
+    </article>
+    <article class="scrap scrap-cream tilt-r card">
+      <img class="tape" src="assets/paper_3.webp" alt="">
+      <h3>Как считаем просмотры</h3>
+      <ul>
+        <li>Только ролики, где виден Nuanu.</li>
+        <li>Цифра на 30-й день после публикации.</li>
+        <li>Без платной рекламы.</li>
+        <li>Отчёт каждый месяц.</li>
+      </ul>
+      <details><summary>Подробнее</summary>
+        <p>Засчитываем ролик, если в нём есть название Nuanu, отметка, геолокация или узнаваемое место. Сторис — только со скриншотами статистики аккаунта. Совместную публикацию считаем один раз. Рекламные показы (Spark Ads, реклама Meta) не считаются.</p>
+      </details>
+    </article>
+  </div>
+
+  <!-- payment scheme: drawn as cut-paper cards and contour arrows -->
+  <div class="scheme" id="scheme">
+    <h2 class="scheme-title">Сколько стоит</h2>
+
+    <div class="months">
+      <div class="m m1"><small>Месяц 1</small><b>$0</b><span>бесплатно</span></div>
+      <svg class="arrow" viewBox="0 0 120 40" aria-hidden="true"><path d="M4 22 C 40 6, 80 34, 108 18" /><path d="M96 8 L 110 18 L 97 29" /></svg>
+      <div class="m m2"><small>Месяцы 2–6</small><b>$5 540</b><span>в месяц за работу команды</span>
+        <ul class="split"><li><i class="dot d1"></i>Mr. G (менеджер) — $3 000</li><li><i class="dot d2"></i>съёмочная группа — ~$2 040</li><li><i class="dot d3"></i>управление — $500</li></ul>
+      </div>
+    </div>
+
+    <div class="views">
+      <p class="views-title">Бонус за просмотры, накопительно за полгода</p>
+      <div class="ruler">
+        <div class="zone z0"><b>$0</b><span>меньше 50 млн — бонуса нет</span></div>
+        <div class="zone z1"><b>$150 → $300 за 1 млн</b><span>ставка растёт с результатом и считается на все просмотры: 50 млн — $150, 75 млн — $225, 100 млн — $300</span></div>
+        <div class="zone z2"><b>$300 за 1 млн</b><span>выше 100 млн ставка больше не растёт</span></div>
+      </div>
+      <div class="ticks"><span>0</span><span>50 млн</span><span>100 млн — цель</span><span><b class="tick-end">150 млн</b></span></div>
+    </div>
+
+    <p class="stop">Остановиться можно после любого месяца.</p>
+  </div>
+
+  <!-- plan -->
+  <div class="plan">
+    <h2 class="scheme-title">План</h2>
+    <ol class="road-signs">
+      <li><b>2–4 недели</b>подготовка</li>
+      <li><b>Месяц 1</b>запуск, бесплатно</li>
+      <li><b>Решение</b>продолжаем или нет</li>
+      <li><b>Месяцы 2–6</b>растём к 100 млн+</li>
+    </ol>
+  </div>
+
+  <!-- after month 1: how Nuanu checks that the pimp delivers -->
+  <article class="scrap scrap-pink tilt-r card wide">
+    <img class="tape" src="assets/paper_0.webp" alt="">
+    <h3>Как понять, что пимп справляется</h3>
+    <ul>
+      <li>Приехали те, кого обещали: визиты, съёмки, встречи.</li>
+      <li>Просмотры роликов, где виден Nuanu.</li>
+      <li>Растёт интерес к Nuanu: поиск в Google, подписки на Instagram Nuanu.</li>
+      <li>Чеки гостей за месяц.</li>
+    </ul>
+    <details><summary>Подробнее</summary>
+      <p>После первого месяца сводим всё в один отчёт: сколько блогеров приехало и сколько выложили ролики; просмотры на 30-й день; запросы «Nuanu» в Google Trends по Индонезии и Бали; прирост подписчиков и заходов в профиль Instagram Nuanu; сохранения, репосты и комментарии вида «где это?»; отзывы и отметки на Google Maps; чеки гостей. Рост поиска и подписок сам по себе не доказывает, что человек пришёл именно из-за ролика, поэтому смотрим на всё вместе.</p>
+    </details>
+  </article>
+</section>
+
+<!-- ============ 4. THE BILL ============ -->
+<section id="bill">
+  <img class="giant-hand" src="assets/giant_hand.webp" alt="" aria-hidden="true">
+  <div class="receipt">
+    <h2>Счёт</h2>
+    <p class="sub">Mr. G · Nuanu Creative City · Бали · 6 месяцев</p>
+    <p class="sub">Первый месяц бесплатно.</p>
+    <ul class="fixed-row">
+      <li><span>Работа команды</span><i></i><b>$27 700</b><em>фикс</em></li>
+    </ul>
+    <p class="sub small">$5 540 в месяц × месяцы 2–6, при любом результате</p>
+    <div class="thead"><span>Просмотров за 6 мес.</span><span>За просмотры</span><span>За 1 000</span></div>
+    <ul>
+      <li><span>Меньше 50 млн</span><i></i><b>$0</b><em>$0</em></li>
+      <li><span>50 млн</span><i></i><b>$7 500</b><em>$0,15</em></li>
+      <li><span>75 млн</span><i></i><b>$16 875</b><em>$0,23</em></li>
+      <li class="goal"><span>100 млн — цель</span><i></i><b>$30 000</b><em>$0,30</em></li>
+      <li><span>150 млн</span><i></i><b>$45 000</b><em>$0,30</em></li>
+    </ul>
+    <p class="sub small">Чем больше просмотров, тем выше ставка — но не больше $300 за 1 млн.</p>
+    <div class="total"><span>Пост у блогера</span><b>$1–2 за 1 000</b></div>
+    <div class="stamp">ПЛАТИТЕ<br>ЗА РЕЗУЛЬТАТ</div>
+  </div>
+</section>
+
+<!-- ============ 5. GATE / CTA ============ -->
+<section id="gate">
+  <div class="gate-scene">
+    <div class="gate-half left" aria-hidden="true"></div>
+    <div class="gate-half right" aria-hidden="true"></div>
+    <div class="vip">
+      <h2>Садитесь в машину.</h2>
+      <p>Первый месяц — бесплатно.<br>Дальше решение за Nuanu.</p>
+      <a class="sticker-btn big" href="#hero" id="again">Прокатиться ещё ↺</a>
+    </div>
+  </div>
+  <footer>Mr. G × Nuanu · прототип · <span id="year"></span></footer>
+</section>
+
+<img class="giant-foot" id="foot" src="assets/giant_foot.webp" alt="" aria-hidden="true">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+<script src="talents.js"></script>
+<script src="anchors.js"></script>
+<script src="app.js"></script>
+<script>
+// preload: <img> tags + CSS background images; decode() so the first frame that shows them is not a hitch
+(() => {
+  const urls = new Set([...document.images].map(i => i.currentSrc || i.src));
+  for (const sh of document.styleSheets) { try { for (const r of sh.cssRules) { const m = (r.cssText || '').match(/url\(["']?([^"')]+\.(?:webp|png|jpe?g))["']?\)/g);
+    (m || []).forEach(u => urls.add(new URL(u.replace(/url\(["']?|["']?\)/g, ''), sh.href || location.href).href)); } } catch (e) {} }
+  document.querySelectorAll('img[src*="heads/"], .walker img, .pap img').forEach(i => urls.add(i.src));
+  const list = [...urls]; let done = 0;
+  const bar = document.getElementById('ldBar'), pct = document.getElementById('ldPct');
+  const step = () => { done++; const p = Math.round(done / list.length * 100); bar.style.width = p + '%'; pct.textContent = p + '%'; };
+  const load = u => new Promise(res => { const im = new Image(); im.src = u; (im.decode ? im.decode() : Promise.resolve()).catch(() => {}).then(() => { step(); res(); }); });
+  const frame = () => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+  // warm-up: behind the loader, scroll through the whole page once so every scene is laid out, rasterized
+  // and uploaded to the GPU before the viewer touches it; then jump back to the top
+  const warm = async () => {
+    window.__warming = true;
+    document.getElementById('ldText').textContent = 'прогреваем сцену…';
+    ScrollTrigger.refresh();
+    const max = document.documentElement.scrollHeight - innerHeight, n = 36;
+    for (let i = 0; i <= n; i++) { window.scrollTo(0, max * i / n); ScrollTrigger.update(); await frame(); }
+    window.scrollTo(0, 0); ScrollTrigger.update(); await frame();
+    window.__resetReveals && window.__resetReveals(); window.__warming = false; await frame();
+  };
+  const finish = async () => {
+    await warm();
+    const l = document.getElementById('loader'); l.classList.add('out'); setTimeout(() => l.remove(), 500);
+    window.__startIntro && window.__startIntro();
+  };
+  const fonts = document.fonts ? document.fonts.ready : Promise.resolve();
+  Promise.race([Promise.all([fonts, ...list.map(load)]), new Promise(r => setTimeout(r, 20000))]).then(finish);
+})();
+</script>
+</body>
+</html>
